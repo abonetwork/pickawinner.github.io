@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
+
+  <head>
+    <meta http-equiv="Content-Language" content="en-us" />
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Raffle Picker</title>
+    <link
+      rel="stylesheet"
+      href="css/bootstrap-v3.3.6.min.css"
+      type="text/css"
+      media="all"
+    />
+    <link rel="stylesheet" href="css/style1.css" type="text/css" media="all" />
+    <link
+      href="https://fonts.googleapis.com/css?family=Lobster"
+      rel="stylesheet"
+      type="text/css"
+    />
+    <script
+      type="d2d173588c3c8c056fcb73a5-text/javascript"
+      src="js/jQuery v2.2.4.min.js"
+    ></script>
+    <script
+      type="d2d173588c3c8c056fcb73a5-text/javascript"
+      src="js/jquery.minicolors.min.js"
+    ></script>
+
+    <style>
+      #widget-holder {
+        /* top: 55px; */
+        position: relative;
+        padding-bottom: 60px;
+      }
+
+      #widget-header {
+        position: fixed;
+        padding: 12px 20px 10px 20px;
+        z-index: 500;
+        background: #fff;
+        width: 100%;
+        left: 0;
+        height: 55px;
+        box-shadow: 0 0 5px 3px rgba(0, 0, 0, 0.2);
+        top: 80px;
+      }
+
+      #widget-title {
+        font-size: 24px;
+        color: #aaa;
+        border: none;
+        width: 40%;
+        background: none;
+        border-radius: 4px;
+        padding: 0px 10px;
+      }
+
+      #widget-title:hover,
+      #widget-title:active,
+      #widget-title:focus {
+        background: #f2f2f2;
+        color: #333;
+      }
+
+      #font-selector {
+        position: relative;
+        width: 100%;
+      }
+
+      #selected-font-preview {
+        width: 100%;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        padding: 6px 12px;
+      }
+
+      ul#font-list {
+        position: absolute;
+        top: 30px;
+        display: inline-block;
+        width: 300px;
+        max-height: 400px;
+        overflow-y: auto;
+        list-style: none;
+        overflow-x: hidden;
+        margin: 0;
+        padding: 0;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        z-index: 200;
+        background: #fff;
+      }
+
+      ul#font-list li.font-item {
+        padding: 6px 12px;
+      }
+
+      ul#font-list li.font-item img,
+      #selected-font-preview img {
+        max-height: 25px;
+      }
+
+      ul#font-list li.title-break {
+        font-size: 14px;
+        color: #aaa;
+        text-align: center;
+        border-bottom: 1px solid #eee;
+        margin: 10px;
+      }
+
+      ul#font-list li.font-item:hover {
+        background-color: #eee;
+        cursor: default;
+      }
+
+      .inner-header {
+        /* background-color: #928a97; */
+        /* background-image: url("assets/pexels-photo-257909.jpeg"); */
+        /* background-repeat: no-repeat; */
+        /* background-size: cover; */
+        /* height: 100vh; */
+        /* margin: 0; */
+        /* padding: 0; */
+        /* overflow: hidden; */
+        /* position: absolute; */
+      }
+      /* snow */
+
+      #bgdiv {
+        background-image: url("assets/pexels-photo-257909.jpeg");
+        background-repeat: no-repeat;
+        height: 100vh;
+      }
+
+      @import url(https://fonts.googleapis.com/css?family=Lato:400, 700);
+      body {
+        overflow: hidden;
+      }
+      /* body,
+      html {
+        overflow: hidden;
+        margin: 0;
+        height: 100%;
+        font-family: "Lato";
+        font-weight: 700;
+        font-size: 30px;
+        text-transform: uppercase;
+        color: #fff;
+      } */
+
+      .sky {
+        height: 1100px;
+        color: #fff;
+        display: block;
+      }
+    </style>
+  </head>
+
+  <body
+    class="widget-template-default single single-widget postid-2982198 no-touch"
+  >
+    <section class="sky">
+      <div id="bgdiv"></div>
+    </section>
+    <div id="holder" class="canvas" style="margin-top: -1010px;">
+      <div id="main">
+        <style>
+          #widget-header .dropdown-menu {
+            left: -125px;
+          }
+        </style>
+
+        <form
+          id="widget-form"
+          action="#"
+          method="POST"
+          role="form"
+          enctype="multipart/form-data"
+        >
+          <div class="row inner-header text-center" style="">
+            <div class="container" style="max-width: 1100px;">
+              <div class="row">
+                <div class="col-sm-12">
+                  <h1 id="page-title" style="margin-bottom:0;">
+                    Pick A Lucky Winner.
+                  </h1>
+                  <p class="lead" style="color:#fff; margin-bottom:40px;">
+                    Are you a lucky winner?
+                  </p>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-8 col-md-offset-2 text-center results">
+                  <!-- <div
+                    style="display:inline-block; padding:0 70px; margin:0 auto; width:100%; box-sizing:border-box"
+                  >
+                    <input
+                      type="button"
+                      name="go"
+                      id="go"
+                      class="btn btn-danger btn-lg btn-block pulse"
+                      style="padding:10px; font-size:28px;"
+                      value="Pick!"
+                    />
+                  </div> -->
+
+                  <div class="bg">
+                    <div class="centerer">
+                      <div
+                        href="#"
+                        name="go"
+                        id="go"
+                        style="cursor: pointer;"
+                        class="xmassButton pulse"
+                      >
+                        Pick
+                      </div>
+                    </div>
+                  </div>
+
+                  <div id="result-holder">
+                    <div id="result-cell">
+                      <img
+                        src="assets/selector_glass1.png"
+                        class="img-full img-glass"
+                      />
+                      <div id="result">
+                        <ul class="wrapper"></ul>
+                      </div>
+                    </div>
+                  </div>
+
+                  <button
+                    name="remove-name"
+                    id="remove-name"
+                    class="btn btn-info"
+                    type="button"
+                    style="display:none; font-size: 1.345rem;"
+                  >
+                    Remove ID?
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div id="widget-holder" style="display: none;">
+            <div id="random-name-selector">
+              <div id="options" class="container">
+                <div class="row">
+                  <div class="col-md-8 col-md-offset-2 text-center">
+                    <div
+                      class="panel panel-default ts-shadow--4dp "
+                      style="padding: 30px;"
+                    >
+                      <div class="panel-body text-left">
+                        <h4>Names</h4>
+
+                        <textarea
+                          name="students"
+                          id="students"
+                          rows="3"
+                          placeholder="Separate each name with a comma..."
+                          class="form-control widget-option"
+                        ></textarea>
+                        <p class="help-block">
+                          Please separate each student name with a comma.
+                        </p>
+                        <div
+                          id="removed-students"
+                          style="display:none; margin-top:10px;"
+                        >
+                          <button
+                            type="button"
+                            class="btn btn-sm btn-info"
+                            id="reset-students"
+                            style="margin-right:20px;"
+                          >
+                            Reset removed names
+                          </button>
+                        </div>
+
+                        <!-- <h4 class="margin-top">Options</h4> -->
+
+                        <div class="form-group" style="display: none;">
+                          <select
+                            class="form-control widget-option"
+                            id="time-setting"
+                            name="time_setting"
+                          >
+                            <option value="1">1 Second</option>
+                            <option value="3" selected="selected"
+                              >3 Seconds</option
+                            >
+                            <option value="5">5 Seconds</option>
+                            <option value="10">10 Seconds</option>
+                          </select>
+                        </div>
+                        <!-- 
+                        <div class="form-group">
+                          <select
+                            class="form-control widget-option"
+                            id="type-setting"
+                            name="type_setting"
+                          >
+                            <option value="" selected="selected"
+                              >Default theme</option
+                            >
+                            <option value="hero">Hero Selector</option>
+                            <option value="victim">Victim Selector</option>
+                            <option value="lucky">Lucky Dip</option>
+                          </select>
+                        </div> -->
+
+                        <div class="history-section" style="display: none">
+                          <!-- <hr /> -->
+                          <h4 class="margin-top">History</h4>
+                          <p id="selected-history"></p>
+                          <p class="text-muted">
+                            <small>Most recent student first.</small>
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="form-group" style="text-align: center">
+                <button type="button" id="hide-button" class="btn btn-info">
+                  Hide Options
+                </button>
+              </div>
+              <!-- <hr /> -->
+            </div>
+
+            <script type="d2d173588c3c8c056fcb73a5-text/javascript">
+              $().ready(function () {
+                  $('#random-name-selector').randomNameSelector({
+                      numberOfSlots: 1,
+                      spinnerDuration: 15,
+                      elementStart: '#go',
+                      elementStudents: '#students',
+                      elementSlot: '#result',
+                      elementSlotList: '.wrapper',
+                      elementNames: '#students',
+                      elementRemoveName: '#remove-name',
+                      elementHideOptions: '#hide-button'
+                  });
+
+              });
+            </script>
+          </div>
+        </form>
+      </div>
+    </div>
+    <!-- <div id="snow"></div> -->
+    <link
+      rel="stylesheet"
+      href="css/style21d8.css"
+      type="text/css"
+      media="all"
+    />
+    <script
+      type="d2d173588c3c8c056fcb73a5-text/javascript"
+      src="js/jquery.jSlots.min.js"
+    ></script>
+    <script
+      type="d2d173588c3c8c056fcb73a5-text/javascript"
+      src="js/jquery.easing.1.3.min.js"
+    ></script>
+    <script
+      type="d2d173588c3c8c056fcb73a5-text/javascript"
+      src="js/widgetdba6.js"
+    ></script>
+
+    <script
+      src="js/rocket-loader.min.js"
+      data-cf-settings="d2d173588c3c8c056fcb73a5-|49"
+      defer=""
+    ></script>
+  </body>
+</html>
