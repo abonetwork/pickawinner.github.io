@@ -71,7 +71,18 @@
               "287",
               "345",
               "455",
-              "225"
+              "225",
+              "123",
+              "456",
+              "475",
+              "125",
+              "78",
+              "86",
+              "96",
+              "90",
+              "245",
+              "154",
+              "214"
             ];
             $this.randomNameSelector("resetStudents");
 
@@ -79,49 +90,13 @@
               prefs.elementStart.prop("disabled", false);
               prefs.elementRemoveName.prop("disabled", false);
             }
-            // });
-
-            // spinner list change handler
-            // prefs.elementSpinnerDuration.change(function() {
-            //   prefs.spinnerDuration = $(this).val();
-            //   $this.randomNameSelector("addSlots").randomNameSelector("reset");
-            // });
-
-            // prefs.elementWordList.change(function() {
-            //   $("#students").val(
-            //     prefs.elementWordList.find(":selected").attr("data-content")
-            //   );
-
-            //   prefs.students = [];
-            //   $this.randomNameSelector("resetStudents");
-
-            //   if ($(".wrapper li").length > 2) {
-            //     prefs.elementStart.prop("disabled", false);
-            //     prefs.elementRemoveName.prop("disabled", false);
-            //   }
-            // });
-
-            // // theme list change handler
-            // prefs.elementTheme.change(function() {
-            //   var selectValue = $(this).val()
-            //       ? $(this).val() + "_bkgd.jpg".inner-header
-            //       : "starBurst",
-            //     selectText = $(this).val()
-            //       ? $("option:selected", this).text()
-            //       : "Random Name Selector";
-
-            //   window.location.href = "#" + selectValue;
-
-            //   prefs.elementPageTitle.html(selectText);
-
-            // });
-            // prefs.elementPageTitleBackground.css(
-            //   "background-image",
-            //   "url(https://images.pexels.com/photos/257909/pexels-photo-257909.jpeg?fit=crop&w=1920&h=1280)"
-            // );
 
             // remove name button handler
             prefs.elementRemoveName.click(function() {
+              // console.log(
+              //   "prefs.finishedIndex: ",
+              //   prefs.students[prefs.finishedIndex]
+              // );
               if (prefs.debug) {
                 console.log("Removing " + prefs.finishedIndex);
               }
@@ -144,6 +119,7 @@
               prefs.students = [];
               $(".wrapper li").each(function(i, o) {
                 prefs.students.push($(o).text());
+                //refresh array
               });
 
               prefs.students.pop();
@@ -157,21 +133,6 @@
               prefs.elementRemoveName.hide();
 
               // $('.wrapper').css({top:0});
-            });
-
-            // hide options button handler
-            prefs.elementHideOptions.click(function() {
-              if ($("#options").is(":visible")) {
-                $("#options").slideUp(function() {
-                  prefs.elementHideOptions.html("Show Options");
-                });
-              } else {
-                $("#options").slideDown(function() {
-                  prefs.elementHideOptions.html("Hide Options");
-                });
-              }
-
-              $(this).blur();
             });
 
             // set up the spinner
@@ -225,7 +186,6 @@
           stop: function(finalNumbers) {
             var slotIndex = finalNumbers[0] - 1,
               slotName = prefs.elementSlot.eq(slotIndex).text();
-
             if (prefs.debug) {
               console.log("finished!");
               console.log(finalNumbers);
@@ -240,7 +200,7 @@
             $("#selected-history").prepend(
               '<span class="label label-default">' + slotName + "</span>"
             );
-
+            console.log("1");
             return $this;
           },
 
@@ -305,6 +265,7 @@
               },
               onEnd: function(finalNumbers) {
                 $this.randomNameSelector("stop", finalNumbers);
+                console.log("3: ", prefs.students[prefs.finishedIndex]);
               },
               easing: prefs.animationType,
               time: prefs.spinnerDuration * 1000
@@ -374,6 +335,15 @@
 // Snow from https://codepen.io/radum/pen/xICAB
 
 (function() {
+  // $(".pop-up").addClass("open");
+  $(".clickme").click(function() {
+    // $(".pop-up").addClass("open");
+  });
+
+  $(".pop-up .close").click(function() {
+    $(".pop-up").removeClass("open");
+  });
+
   var COUNT = 300;
   var masthead = document.querySelector(".sky");
   var canvas = document.createElement("canvas");
