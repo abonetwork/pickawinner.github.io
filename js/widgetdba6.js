@@ -1,3 +1,31 @@
+function setCookie(cname, cvalue, exdays) {
+  var d = new Date();
+  d.setTime(d.getTime() + exdays * 24 * 60 * 60 * 1000);
+  var expires = "expires=" + d.toUTCString();
+  document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+}
+
+const LocalRawData = data => {
+  // console.log("Entries: ", data.localStorage.data);
+  const localData = data.localStorage.data;
+  let pushLocalDataToRaw = {};
+  Object.keys(localData).map(function(key, index) {
+    if (localData[key].attributes) {
+      pushLocalDataToRaw[localData[key].attributes.id] = {
+        id: localData[key].attributes.id,
+        name: localData[key].attributes.name
+      };
+    } else {
+      pushLocalDataToRaw[localData[key].id] = {
+        id: localData[key].id,
+        name: localData[key].name
+      };
+    }
+  });
+  // console.log("updatedCookie: ", JSON.stringify(pushLocalDataToRaw));
+  return JSON.stringify(pushLocalDataToRaw);
+};
+
 $(function() {
   var FADE_DELAY_MS = 800,
     EXTRA_DELAY = 150,
@@ -189,6 +217,7 @@ $(function() {
 
     render: function() {
       // $(".num-entries").text(Entries.length + " entries");
+      setCookie("rawdata", LocalRawData(Entries), 30);
     },
 
     getEntries: function() {

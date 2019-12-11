@@ -5,6 +5,27 @@ function setCookie(cname, cvalue, exdays) {
   document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
 }
 
+const LocalRawData = data => {
+  // console.log("Entries: ", data.localStorage.data);
+  const localData = data.localStorage.data;
+  let pushLocalDataToRaw = {};
+  Object.keys(localData).map(function(key, index) {
+    if (localData[key].attributes) {
+      pushLocalDataToRaw[localData[key].attributes.id] = {
+        id: localData[key].attributes.id,
+        name: localData[key].attributes.name
+      };
+    } else {
+      pushLocalDataToRaw[localData[key].id] = {
+        id: localData[key].id,
+        name: localData[key].name
+      };
+    }
+  });
+  // console.log("updatedCookie: ", JSON.stringify(pushLocalDataToRaw));
+  return JSON.stringify(pushLocalDataToRaw);
+};
+
 $(function() {
   //snow
 
@@ -274,24 +295,8 @@ $(function() {
 
       Entries.create({ name: inputValue });
 
-      console.log("Entries: ", Entries.localStorage.data);
-      const localData = Entries.localStorage.data;
-      let pushLocalDataToRaw = {};
-      Object.keys(localData).map(function(key, index) {
-        if (localData[key].attributes) {
-          pushLocalDataToRaw[localData[key].attributes.id] = {
-            id: localData[key].attributes.id,
-            name: localData[key].attributes.name
-          };
-        } else {
-          pushLocalDataToRaw[localData[key].id] = {
-            id: localData[key].id,
-            name: localData[key].name
-          };
-        }
-      });
-      setCookie("rawdata", JSON.stringify(pushLocalDataToRaw), 30);
-      console.log("pushLocalDataToRaw: ", JSON.stringify(pushLocalDataToRaw));
+      // setCookie("rawdata", LocalRawData(Entries), 30);
+      // console.log("pushLocalDataToRaw: ", JSON.stringify(pushLocalDataToRaw));
 
       this.input.val("");
     },
@@ -318,6 +323,7 @@ $(function() {
     },
 
     render: function() {
+      setCookie("rawdata", LocalRawData(Entries), 30);
       $(".num-entries").text(Entries.length + " entries");
     },
 
