@@ -1,4 +1,119 @@
 $(function() {
+  //snow
+
+  particlesJS("snow", {
+    particles: {
+      number: {
+        value: 100,
+        density: {
+          enable: false,
+          value_area: 800
+        }
+      },
+      color: {
+        value: "#ffffff"
+      },
+      shape: {
+        type: "image",
+        stroke: {
+          width: 3,
+          color: "#fff"
+        },
+        polygon: {
+          nb_sides: 5
+        },
+        image: {
+          src:
+            "http://www.dynamicdigital.us/wp-content/uploads/2013/02/starburst_white_300_drop_2.png",
+          width: 100,
+          height: 100
+        }
+      },
+      opacity: {
+        value: 0.7,
+        random: false,
+        anim: {
+          enable: false,
+          speed: 1,
+          opacity_min: 0.1,
+          sync: false
+        }
+      },
+      size: {
+        value: 5,
+        random: true,
+        anim: {
+          enable: false,
+          speed: 20,
+          size_min: 0.1,
+          sync: false
+        }
+      },
+      line_linked: {
+        enable: false,
+        distance: 50,
+        color: "#ffffff",
+        opacity: 0.6,
+        width: 1
+      },
+      move: {
+        enable: true,
+        speed: 3,
+        direction: "bottom",
+        random: true,
+        straight: false,
+        out_mode: "out",
+        bounce: false,
+        attract: {
+          enable: true,
+          rotateX: 300,
+          rotateY: 1200
+        }
+      }
+    },
+    retina_detect: false
+    // "interactivity": {
+    //   "detect_on": "canvas",
+    //   "events": {
+    //     "onhover": {
+    //       "enable": false,
+    //       "mode":  "bubble"
+    //     },
+    //     "onclick": {
+    //       "enable": true,
+    //       "mode": "repulse"
+    //     },
+    //     "resize": true
+    //   },
+    //   "modes": {
+    //     "grab": {
+    //       "distance": 150,
+    //       "line_linked": {
+    //         "opacity": 1
+    //       }
+    //     },
+    //     "bubble": {
+    //       "distance": 200,
+    //       "size": 40,
+    //       "duration": 2,
+    //       "opacity": 8,
+    //       "speed": 3
+    //     },
+    //     "repulse": {
+    //       "distance": 200,
+    //       "duration": 0.2
+    //     },
+    //     "push": {
+    //       "particles_nb": 4
+    //     },
+    //     "remove": {
+    //       "particles_nb": 2
+    //     }
+    //   }
+    // },
+  });
+
+  // snow
   var FADE_DELAY_MS = 800,
     EXTRA_DELAY = 150,
     SHOW_NAME_DELAY = 150,
@@ -38,37 +153,26 @@ $(function() {
 
   // Basic template for the winner's name
   var NameWinnerView = Backbone.View.extend({
-    // className: "winner",
-    // template: _.template($("#name-winner-template").html()),.
-    el: $("#pop-upid"),
+    className: "winner",
+    template: _.template($("#name-winner-template").html()),
 
     events: {
-      "click .close": "remove"
+      "click .remove": "remove"
     },
 
-    // render: function() {
-    //   this.$el.html(this.template(this.model.toJSON()));
-    //   return this;
-    // },
+    render: function() {
+      this.$el.html(this.template(this.model.toJSON()));
+      return this;
+    },
 
     remove: function() {
-      const modelRemove = this.model;
-      const elRemove = this.$el;
+      this.model.remove();
+      this.$el.remove();
       // total hack, but meah
-      setTimeout(function() {
-        $("#winnerPopup").html("");
-        $("#pop-upid").removeClass("open");
-        setTimeout(function() {
-          modelRemove.remove();
-          elRemove.remove();
-          $("#pick-winner").removeClass("disabled");
-        }, 1000);
-      }, 500);
-      // $("#pop-upid").removeClass("open");
-      // $("#pop-upid").removeClass("open");
-      // $("#selecting-name")
-      //   .removeClass("final-winner")
-      //   .html("<div id='pick-another'>pick</div>");
+      $("#blanket").remove();
+      $("#selecting-name")
+        .removeClass("final-winner")
+        .html("<div id='pick-another'>pick another winner...</div>");
     }
   });
 
@@ -90,13 +194,13 @@ $(function() {
 
     events: {
       "keypress #name-input": "createEntry",
-      // "click #file-trigger": "showHideFileUpload",
-      // "change #file-input": "showFileSample",
-      // "click #file-submit": "createEntriesFromFile",
-      "click #pick-winner": "pickWinner"
+      "click #file-trigger": "showHideFileUpload",
+      "change #file-input": "showFileSample",
+      "click #file-submit": "createEntriesFromFile",
+      "click #pick-winner": "pickWinner",
       // "click #pick-another": "pickWinner",
-      // "click #clear-all-safety": "clearAllSafety",
-      // "click #clear-all": "clearAll"
+      "click #clear-all-safety": "clearAllSafety",
+      "click #clear-all": "clearAll"
     },
 
     initialize: function() {
@@ -156,7 +260,6 @@ $(function() {
     },
 
     createEntry: function(e) {
-      // console.log("a");
       if (e.which !== 13) return;
       var inputValue = this.input.val().trim();
 
@@ -188,7 +291,7 @@ $(function() {
     },
 
     render: function() {
-      // $(".num-entries").text(Entries.length + " entries");
+      $(".num-entries").text(Entries.length + " entries");
     },
 
     getEntries: function() {
@@ -225,13 +328,9 @@ $(function() {
     },
 
     pickWinner: function() {
-      setTimeout(function() {
-        $("#winnerPopup").html("");
-      }, 1000);
       var that = this,
         shuffledNames = this.buildDecentShuffledList();
 
-      $("#pick-winner").addClass("disabled");
       console.log("Picking winner...");
       // Clean-up existing space
       if ($("#entry-container").length > 0) {
@@ -243,15 +342,14 @@ $(function() {
           });
         });
       } else {
-        //$("#pick-another").fadeOut(FADE_DELAY_MS, function() {
-        // $(this).remove();
-        that.easingTimeout(that.showNames, shuffledNames, SHOW_NAME_DELAY);
-        //});
+        $("#pick-another").fadeOut(FADE_DELAY_MS, function() {
+          $(this).remove();
+          that.easingTimeout(that.showNames, shuffledNames, SHOW_NAME_DELAY);
+        });
       }
     },
 
     showNames: function(names) {
-      $("#rollNameId").text(names[0]);
       $("#selecting-name").text(names[0]);
       // console.log("Showed: " + names[0]);
       return names.slice(1);
@@ -261,7 +359,6 @@ $(function() {
       var that = this;
       var internalCallback = (function(names, delay) {
         return function() {
-          $("#winnerPopup").html("");
           if (names && names.length !== 0) {
             if (names.length === 20) {
               delay += EXTRA_DELAY; // Increase overall delay slightly
@@ -272,23 +369,13 @@ $(function() {
             names = callback(names);
             setTimeout(internalCallback, delay);
           } else {
-            $("#winnerPopup").html("");
-            setTimeout(function() {
-              $("#pop-upid").show();
-              $("#pop-upid").addClass("open");
-            }, 1000);
             var selectedWinner = $("#selecting-name")
                 .text()
                 .trim(),
               winner = Entries.where({ name: selectedWinner })[0],
               winnerView = new NameWinnerView({ model: winner });
-
-            setTimeout(function() {
-              $("#winnerPopup").html(selectedWinner);
-            }, 500);
             console.log("Winner is: " + selectedWinner);
-            $("#rollNameId").html(selectedWinner);
-            $("#popupdiv").html(winnerView.render().el);
+            $("#selecting-name").html(winnerView.render().el);
             setTimeout(function() {
               $("#selecting-name").addClass("final-winner");
               $("body").append("<div id='blanket'></div>");
@@ -298,137 +385,27 @@ $(function() {
       })(names, delay);
 
       setTimeout(internalCallback, 0);
+    },
+
+    clearAllSafety: function() {
+      this.$el.append(
+        "<div id='clear-all' class='hidden-trigger'>CLEAR ALL</div>"
+      );
+      // Give a 3 second delay before removing clear-all switch
+      setTimeout(function() {
+        $("#clear-all").remove();
+      }, 3000);
+    },
+
+    clearAll: function() {
+      _.each(Entries.all(), function(entry) {
+        entry.remove();
+      });
+      $(".name-list").empty();
+      $("#clear-all").remove();
+      return false;
     }
-
-    // clearAllSafety: function() {
-    //   this.$el.append(
-    //     "<div id='clear-all' class='hidden-trigger'>CLEAR ALL</div>"
-    //   );
-    //   // Give a 3 second delay before removing clear-all switch
-    //   setTimeout(function() {
-    //     $("#clear-all").remove();
-    //   }, 3000);
-    // },
-
-    // clearAll: function() {
-    //   _.each(Entries.all(), function(entry) {
-    //     entry.remove();
-    //   });
-    //   $(".name-list").empty();
-    //   $("#clear-all").remove();
-    //   return false;
-    // }
   });
 
   MyApp = new App();
 });
-
-// Snow from https://codepen.io/radum/pen/xICAB
-
-(function() {
-  // $(".pop-up").addClass("open");
-  $(".close").click(function() {
-    // $(".pop-up").addClass("open");
-    console.log("run click");
-    setTimeout(function() {
-      $("#winnerPopup").html("");
-    }, 1000);
-  });
-
-  // $(".pop-up .close").click(function() {
-  //   $(".pop-up").removeClass("open");
-  // });
-
-  var COUNT = 300;
-  var masthead = document.querySelector(".sky");
-  var canvas = document.createElement("canvas");
-  var ctx = canvas.getContext("2d");
-  var width = masthead.clientWidth;
-  var height = masthead.clientHeight;
-  var i = 0;
-  var active = false;
-
-  function onResize() {
-    width = masthead.clientWidth;
-    height = masthead.clientHeight;
-    canvas.width = width;
-    canvas.height = height;
-    ctx.fillStyle = "#FFF";
-
-    var wasActive = active;
-    active = width > 600;
-
-    if (!wasActive && active) requestAnimFrame(update);
-  }
-
-  var Snowflake = function() {
-    this.x = 0;
-    this.y = 0;
-    this.vy = 0;
-    this.vx = 0;
-    this.r = 0;
-
-    this.reset();
-  };
-
-  Snowflake.prototype.reset = function() {
-    this.x = Math.random() * width;
-    this.y = Math.random() * -height;
-    this.vy = 1 + Math.random() * 3;
-    this.vx = 0.5 - Math.random();
-    this.r = 1 + Math.random() * 2;
-    this.o = 0.5 + Math.random() * 0.5;
-  };
-
-  canvas.style.position = "absolute";
-  canvas.style.left = canvas.style.top = "0";
-
-  var snowflakes = [],
-    snowflake;
-  for (i = 0; i < COUNT; i++) {
-    snowflake = new Snowflake();
-    snowflake.reset();
-    snowflakes.push(snowflake);
-  }
-
-  function update() {
-    ctx.clearRect(0, 0, width, height);
-
-    if (!active) return;
-
-    for (i = 0; i < COUNT; i++) {
-      snowflake = snowflakes[i];
-      snowflake.y += snowflake.vy;
-      snowflake.x += snowflake.vx;
-
-      ctx.globalAlpha = snowflake.o;
-      ctx.beginPath();
-      ctx.arc(snowflake.x, snowflake.y, snowflake.r, 0, Math.PI * 2, false);
-      ctx.closePath();
-      ctx.fill();
-
-      if (snowflake.y > height) {
-        snowflake.reset();
-      }
-    }
-
-    requestAnimFrame(update);
-  }
-
-  // shim layer with setTimeout fallback
-  window.requestAnimFrame = (function() {
-    return (
-      window.requestAnimationFrame ||
-      window.webkitRequestAnimationFrame ||
-      window.mozRequestAnimationFrame ||
-      function(callback) {
-        window.setTimeout(callback, 1000 / 60);
-      }
-    );
-  })();
-
-  onResize();
-  window.addEventListener("resize", onResize, false);
-
-  masthead.appendChild(canvas);
-})();
