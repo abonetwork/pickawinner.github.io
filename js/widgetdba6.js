@@ -6,7 +6,7 @@ function setCookie(cname, cvalue, exdays) {
 }
 
 const LocalRawData = data => {
-  console.log("Entries: ", data.localStorage.data);
+  console.log("EntriesB: ", data.localStorage.data);
   const localData = data.localStorage.data;
   let pushLocalDataToRaw = {};
   Object.keys(localData).map(function(key, index) {
