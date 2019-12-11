@@ -216,8 +216,9 @@ $(function() {
     },
 
     render: function() {
-      // $(".num-entries").text(Entries.length + " entries");
+      console.log("render");
       setCookie("rawdata", LocalRawData(Entries), 30);
+      // $(".num-entries").text(Entries.length + " entries");
     },
 
     getEntries: function() {
