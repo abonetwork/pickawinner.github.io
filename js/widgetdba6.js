@@ -359,7 +359,7 @@ $(function() {
   // $(".pop-up").addClass("open");
   $(".close").click(function() {
     // $(".pop-up").addClass("open");
-    console.log("run click");
+    // console.log("run click");
     setTimeout(function() {
       $("#winnerPopup").html("");
     }, 1000);
