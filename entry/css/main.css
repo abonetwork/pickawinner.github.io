@@ -1,14 +1,14 @@
 @import url("https://fonts.googleapis.com/css?family=Mirza&amp;subset=latin-ext");
 
 body {
-  color: #333;
+  color: #fff;
   background: rgb(0, 0, 0);
   background: url("../img/pexels-photo-257909.jpeg") no-repeat center
     center/cover;
   overflow: hidden;
   height: 100vh;
 
-  font-family: "Mirza", Verdana, Arial, serif;
+  font-family: Lobster, cursive;
   font-size: 36px;
   line-height: 1.2em;
 }
@@ -17,15 +17,9 @@ body {
   padding: 20px;
   margin: 50px auto;
   width: 630px;
-  background: #fff;
-  border: 1px solid #888;
-  box-shadow: 3px 3px 5px 5px #ccc;
-  border-radius: 5px;
   height: 545px;
 
-  background-color: #d4d1d0;
-  background-image: url("https://www.dropbox.com/s/8hw7guch8d151kg/pattern.png?raw=1");
-  /* border: 20px solid #d4d1d0; */
+  /* background-image: url("https://www.dropbox.com/s/8hw7guch8d151kg/pattern.png?raw=1"); */
 }
 
 .sub-title {
@@ -106,12 +100,16 @@ body {
 
 /* Input area */
 #name-input {
-  font-size: 30px;
-  font-family: helvetica;
-  width: 620px;
+  font-size: 114px;
+  font-family: "Lobster", cursive;
+  width: 555px;
   padding: 5px;
-  border-radius: 3px;
-  border: 2px solid #ccc;
+  outline: none;
+  text-align: center;
+  background: none;
+  border: none;
+  color: #fff;
+  margin-left: 80px;
 }
 
 #name-input::-webkit-input-placeholder {
@@ -125,11 +123,12 @@ body {
 
 /* List of names */
 #name-list-container {
+  width: 300px;
   overflow-y: auto;
-  height: 375px;
-  margin-top: 10px;
-  margin-right: -20px;
-  padding-right: 20px;
+  height: 1077px;
+  margin-left: -646px;
+  margin-top: -615px;
+  background: #000;
 }
 
 ul {
@@ -158,7 +157,7 @@ ul {
 }
 
 .row:hover {
-  background-color: #dedede;
+  background-color: #747474;
 }
 
 .name,
@@ -256,6 +255,7 @@ ul {
   margin-right: 0.2em;
   text-align: center;
   line-height: 1em;
+  display: none;
 }
 
 .remove::before {

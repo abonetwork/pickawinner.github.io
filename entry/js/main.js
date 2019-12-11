@@ -27,6 +27,19 @@ const LocalRawData = data => {
 };
 
 $(function() {
+  $("#glassInput").keyup(function() {
+    var textInput = $(this).val();
+    console.log(textInput);
+    $("#name-input").val(textInput);
+  });
+
+  $("#glassInput").keypress(function(e) {
+    var textInput = $("#glassInput").val();
+    if (e.keyCode == 13) {
+      $("#name-input").trigger("enterKey");
+    }
+  });
+
   //snow
 
   particlesJS("snow", {
@@ -310,10 +323,10 @@ $(function() {
       if (entryListLength !== 0) {
         var indexOfEntry = _.indexOf(Entries.models, nameEntry);
         nameListClass =
-          indexOfEntry % 2 === 0 ? ".name-list.left" : ".name-list.right";
+          indexOfEntry % 2 === 0 ? ".name-list.left" : ".name-list.left";
       } else {
         nameListClass =
-          Entries.length % 2 === 0 ? ".name-list.right" : ".name-list.left";
+          Entries.length % 2 === 0 ? ".name-list.left" : ".name-list.left";
       }
       this.$(nameListClass).prepend(view.render().el);
     },

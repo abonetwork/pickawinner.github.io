@@ -90,7 +90,7 @@ $(function() {
           modelRemove.remove();
           elRemove.remove();
           $("#pick-winner").removeClass("disabled");
-        }, 1000);
+        }, 500);
       }, 500);
       // $("#pop-upid").removeClass("open");
       // $("#pop-upid").removeClass("open");

@@ -268,6 +268,9 @@ body {
   box-sizing: border-box;
 }
 
+#main {
+  top: 120px;
+}
 body {
   overflow: hidden;
   background: #3e4146;
@@ -351,7 +354,7 @@ body {
 .pop-up {
   background-image: url("../assets/page-bg.png");
   position: absolute;
-  top: 50%;
+  top: 33%;
   left: 50%;
   -webkit-transform: translate(-50%, -50%) scale(0.9);
   -moz-transform: translate(-50%, -50%) scale(0.9);

@@ -11,21 +11,83 @@
 
     <script src="js/main.js"></script>
     <link rel="stylesheet" type="text/css" href="css/main.css" />
+    <link
+      href="https://fonts.googleapis.com/css?family=Lobster"
+      rel="stylesheet"
+      type="text/css"
+    />
   </head>
   <div id="snow"></div>
   <body>
     <div id="outer-container">
-      <span class="num-entries"></span>
-      <!-- <img src="img/dummy-logo.png" /> -->
-      <div id="entry-container">
-        <div class="sub-title">
-          Enter your employee id to be in the draw to win!
+      <div id="widget-form">
+        <div>
+          <div
+            class=""
+            style="    text-align: center;
+    margin-top: 177px;"
+          >
+            <div class="">
+              <div class="col-sm-12">
+                <h1 id="page-title" style="margin-bottom:0;width: 706px;">
+                  Are you a lucky winner?
+                </h1>
+                <p
+                  class="lead"
+                  style="color: #fff;
+    margin-bottom: 40px;
+    text-align: center;
+    margin-left: 47px;
+    width: 631px;
+"
+                >
+                  Please enter your employee id to win prizes.
+                </p>
+              </div>
+            </div>
+            <div class="">
+              <div class="col-md-8 col-md-offset-2 text-center results">
+                <div id="result-holder">
+                  <div id="result-cell">
+                    <img
+                      src="../assets/selector_glass1.png"
+                      class="img-full img-glass"
+                    />
+                    <div id="result" style="margin-top: -340px;">
+                      <div
+                        style="font-size: 12.345rem;padding: 100px;"
+                        id="rollNameId"
+                      >
+                        <input
+                          type="text"
+                          id="glassInput"
+                          style="
+                                              font-size: 122px;
+                                              font-family: Lobster,cursive;
+                                              width: 561px;
+                                              margin-left: 6px;
+                                              outline: none;
+                                              text-align: center;
+                                              background: transparent;
+                                              border: none;
+                                              color:#fff
+                                              "
+                        />
+                      </div>
+                      <ul class="wrapper"></ul>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
-        <input
-          id="name-input"
-          type="text"
-          placeholder="enter your employee id..."
-        />
+      </div>
+      <span class="num-entries" style="    margin-top: -100px;"></span>
+      <!-- <img src="img/dummy-logo.png" /> -->
+      <div id="entry-container" style="text-align: center;margin-top: -298px;">
+        <div class="sub-title"></div>
+        <input id="name-input" autocomplete="off" type="text" placeholder="" />
         <div id="name-list-container">
           <ul class="name-list left"></ul>
           <ul class="name-list right"></ul>
@@ -43,7 +105,12 @@
         <div id="file-sample"></div>
         <input type="button" id="file-submit" value="Submit entries" />
       </div>
-      <div id="pick-winner" class="hidden-trigger" style="cursor:pointer;">
+      <div
+        id="pick-winner"
+        style="display: none;"
+        class="hidden-trigger"
+        style="cursor:pointer;"
+      >
         pick winner
       </div>
       <!-- <div id="clear-all-safety" class="hidden-trigger">clear all</div> -->
