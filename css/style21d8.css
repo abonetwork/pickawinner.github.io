@@ -274,7 +274,9 @@ body {
 body {
   overflow: hidden;
   background: #3e4146;
-  font-family: "Roboto Condensed", sans-serif;
+  color:#fff;
+  font-family: Lobster, cursive;
+  font-size: 36px;
 }
 
 /* BUTTON

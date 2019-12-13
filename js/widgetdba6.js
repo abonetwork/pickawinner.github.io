@@ -26,6 +26,32 @@ const LocalRawData = data => {
   return JSON.stringify(pushLocalDataToRaw);
 };
 
+var congratsSound;
+var backgroundSound;
+
+function Sound(src, loop) {
+  this.sound = document.createElement("audio");
+  this.sound.src = src;
+  this.sound.setAttribute("preload", "auto");
+  this.sound.setAttribute("controls", "none");
+  this.sound.style.display = "none";
+  document.body.appendChild(this.sound);
+  this.play = function() {
+    this.sound.play();
+    if (loop) this.sound.loop = true;
+  };
+  this.pause = function() {
+    this.sound.pause();
+  };
+  this.stop = function() {
+    this.sound.pause();
+    this.sound.currentTime = 0;
+  };
+}
+// function bodyLoad() {
+
+// }
+
 $(function() {
   var FADE_DELAY_MS = 800,
     EXTRA_DELAY = 150,
@@ -87,6 +113,7 @@ $(function() {
         $("#winnerPopup").html("");
         $("#pop-upid").removeClass("open");
         setTimeout(function() {
+          congratsSound.stop();
           modelRemove.remove();
           elRemove.remove();
           $("#pick-winner").removeClass("disabled");
@@ -306,6 +333,8 @@ $(function() {
             setTimeout(function() {
               $("#pop-upid").show();
               $("#pop-upid").addClass("open");
+              console.log("a");
+              congratsSound.play();
             }, 1000);
             var selectedWinner = $("#selecting-name")
                 .text()
@@ -356,6 +385,9 @@ $(function() {
 // Snow from https://codepen.io/radum/pen/xICAB
 
 (function() {
+  congratsSound = new Sound("assets/sounds/crowd-1.mp3");
+  backgroundSound = new Sound("assets/sounds/bg-sound-2.mp3", true);
+
   // $(".pop-up").addClass("open");
   $(".close").click(function() {
     // $(".pop-up").addClass("open");
@@ -364,7 +396,14 @@ $(function() {
       $("#winnerPopup").html("");
     }, 1000);
   });
-
+  var isBgPlaying = false;
+  $("body").click(function() {
+    if (!isBgPlaying) {
+      console.log("Song playing...");
+      backgroundSound.play();
+      isBgPlaying = true;
+    }
+  });
   // $(".pop-up .close").click(function() {
   //   $(".pop-up").removeClass("open");
   // });
