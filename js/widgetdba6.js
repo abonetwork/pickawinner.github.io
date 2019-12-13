@@ -28,6 +28,7 @@ const LocalRawData = data => {
 
 var congratsSound;
 var backgroundSound;
+var rollSound;
 
 function Sound(src, loop) {
   this.sound = document.createElement("audio");
@@ -38,7 +39,9 @@ function Sound(src, loop) {
   document.body.appendChild(this.sound);
   this.play = function() {
     this.sound.play();
-    if (loop) this.sound.loop = true;
+    if (loop) {
+      this.sound.loop = true;
+    }
   };
   this.pause = function() {
     this.sound.pause();
@@ -46,6 +49,12 @@ function Sound(src, loop) {
   this.stop = function() {
     this.sound.pause();
     this.sound.currentTime = 0;
+  };
+  this.playbackRate = function() {
+    this.sound.playbackRate = 0.7;
+  };
+  this.playbackRateReset = function() {
+    this.sound.playbackRate = 1;
   };
 }
 // function bodyLoad() {
@@ -243,7 +252,7 @@ $(function() {
     },
 
     render: function() {
-      console.log("render");
+      // console.log("render");
       setCookie("rawdata", LocalRawData(Entries), 30);
       // $(".num-entries").text(Entries.length + " entries");
     },
@@ -282,6 +291,9 @@ $(function() {
     },
 
     pickWinner: function() {
+      rollSound.playbackRateReset();
+      rollSound.play();
+
       setTimeout(function() {
         $("#winnerPopup").html("");
       }, 1000);
@@ -325,15 +337,17 @@ $(function() {
             }
             if (names.length < 10) {
               delay += 50; // Keep adding to delay, to get the 'slow-down' effect
+              rollSound.playbackRate();
             }
             names = callback(names);
             setTimeout(internalCallback, delay);
           } else {
             $("#winnerPopup").html("");
+            rollSound.stop();
             setTimeout(function() {
               $("#pop-upid").show();
               $("#pop-upid").addClass("open");
-              console.log("a");
+              // console.log("a");
               congratsSound.play();
             }, 1000);
             var selectedWinner = $("#selecting-name")
@@ -387,6 +401,7 @@ $(function() {
 (function() {
   congratsSound = new Sound("assets/sounds/crowd-1.mp3");
   backgroundSound = new Sound("assets/sounds/bg-sound-2.mp3", true);
+  rollSound = new Sound("assets/sounds/slowRoll-1.mp3", true);
 
   // $(".pop-up").addClass("open");
   $(".close").click(function() {
