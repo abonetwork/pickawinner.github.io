@@ -3,9 +3,14 @@ const animationDelayMultiplier = 1.0;
 
 // build the numbers row:
 const _buildResultsHTML = numbers => {
+  const delayTime = (numbers.length + 1 * animationDelayMultiplier) * 1000;
+  setTimeout(function() {
+    $("#removeBtn").show();
+  }, delayTime);
   return numbers
     .map((number, index) => {
       const animationDelay = index * animationDelayMultiplier + "s";
+
       return `<span class="number" style="animation-delay: ${animationDelay};">${number}</span>`;
     })
     .join("");
@@ -21,6 +26,7 @@ const _generateNumber = (
 ) => {
   let number =
     Math.ceil(Math.random() * (maxNumber - minNumber + 1)) - 1 + minNumber;
+  //   console.log(nameEntryListTemp);
   const formatedNumber = number < 10 ? String("0" + number) : number;
   return numbersArray.indexOf(formatedNumber) < 0
     ? numbersArray.push(formatedNumber)
@@ -37,8 +43,12 @@ const _generateNumber = (
 const getVal = id => parseInt(document.getElementById(id).value);
 
 // Main Function:
+var nameEntryListTemp;
 const getLockyNumbers = () => {
   // Create the Array to store the numbers and the string for HTML template:
+  nameEntryListTemp = JSON.parse(localStorage.getItem("name-entry-list"));
+  console.log("nameEntryList: ", nameEntryListTemp);
+
   const numbersArray = [];
   let numbersHTML = "";
 
@@ -68,6 +78,8 @@ const getLockyNumbers = () => {
 
   // Check if the numbers fill all the slots:
   if (numbersArray.length === qtySlots) {
+    $("#removeBtn").hide();
+
     // order the numbers and convert it to html formated string:
     const luckyNumbers = _buildResultsHTML(numbersArray.sort());
 
@@ -79,4 +91,15 @@ const getLockyNumbers = () => {
   }
 };
 
-getLockyNumbers();
+const removeLuckyWinners = () => {
+  var nameEntryListTemp = JSON.parse(localStorage.getItem("name-entry-list"));
+  console.log("nameEntryList: ", nameEntryListTemp);
+
+  Object.keys(nameEntryListTemp).map((key, index) => {
+    console.log(key, index);
+  });
+  // var updateNameEntryList = {}
+  // nameEntryListTemp;
+
+  // localStorage.setItem("nameEntryList", "Smith");
+};

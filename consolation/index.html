@@ -29,19 +29,19 @@
     <![endif]-->
     <header class="controls d-flex justify-content-center align-items-center">
       <div class="heading mr-sm-2">
-        <h1 class="heading">Consolation Winner</h1>
+        <h1 class="heading">Christmas Party Raffle</h1>
       </div>
 
       <div class="controls">
         <form class="form-row">
-          <div class="form-group mr-sm-4" style="display: none;">
-            <label class="control-label" for="numberSlots">Nth Slots</label>
+          <div class="form-group mr-sm-4">
+            <label class="control-label" for="numberSlots"># winner</label>
             <input
               class="form-control"
               name="numberSlots"
               id="numberSlots"
               size="3"
-              value="20"
+              value="10"
             />
           </div>
 
@@ -82,8 +82,18 @@
 
     <main class="container-fluid text-center">
       <section class="results p-2" id="resultsContainer"></section>
+      <section class="results p-2" id="removeBtn" style="display: none;">
+        <button
+          type="button"
+          class="btn btn-danger"
+          onclick="removeLuckyWinners();"
+        >
+          Delete winners
+        </button>
+      </section>
     </main>
 
     <script src="js/conso.js" async defer></script>
+    <script src="../../js/lib/jquery-v1.8.2.js"></script>
   </body>
 </html>
