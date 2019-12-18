@@ -57,6 +57,9 @@ function Sound(src, loop) {
   this.playbackRateReset = function() {
     this.sound.playbackRate = 1;
   };
+  this.volumeDown = function() {
+    this.sound.volume = 0.4;
+  };
 }
 // function bodyLoad() {
 
@@ -404,9 +407,9 @@ $(function() {
   congratsSound = new Sound("assets/sounds/crowd-1.mp3");
   backgroundSound = new Sound("assets/sounds/bg-sound-2.mp3", true);
   rollSound = new Sound("assets/sounds/slowRoll-1.mp3", true);
-  rollSound.volume = 0.5;
+  rollSound.volumeDown();
   winSound = new Sound("assets/sounds/winRoll.mp3");
-  winSound.volume = 0.5;
+  winSound.volumeDown();
 
   // $(".pop-up").addClass("open");
   $(".close").click(function() {
