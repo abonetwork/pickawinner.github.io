@@ -29,6 +29,7 @@ const LocalRawData = data => {
 var congratsSound;
 var backgroundSound;
 var rollSound;
+var winSound;
 
 function Sound(src, loop) {
   this.sound = document.createElement("audio");
@@ -344,6 +345,7 @@ $(function() {
           } else {
             $("#winnerPopup").html("");
             rollSound.stop();
+            winSound.play();
             setTimeout(function() {
               $("#pop-upid").show();
               $("#pop-upid").addClass("open");
@@ -402,6 +404,7 @@ $(function() {
   congratsSound = new Sound("assets/sounds/crowd-1.mp3");
   backgroundSound = new Sound("assets/sounds/bg-sound-2.mp3", true);
   rollSound = new Sound("assets/sounds/slowRoll-1.mp3", true);
+  winSound = new Sound("assets/sounds/winRoll.mp3");
 
   // $(".pop-up").addClass("open");
   $(".close").click(function() {
