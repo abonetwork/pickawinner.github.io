@@ -27,6 +27,17 @@ const _generateNumber = (
   let number =
     Math.ceil(Math.random() * (maxNumber - minNumber + 1)) - 1 + minNumber;
   //   console.log(nameEntryListTemp);
+  let arrNameEntryList = [];
+
+  Object.keys(nameEntryListTemp).map((key, index) => {
+    //  console.log(nameEntryListTemp[key].name,index);
+    arrNameEntryList.push(nameEntryListTemp[key].name);
+  });
+
+  // var a = ["a", "b", "c", "d", "e", "f"];
+  var randomValue = a[Math.floor(a.length * Math.random())];
+  // console.log(randomValue);
+
   const formatedNumber = number < 10 ? String("0" + number) : number;
   return numbersArray.indexOf(formatedNumber) < 0
     ? numbersArray.push(formatedNumber)
@@ -93,11 +104,11 @@ const getLockyNumbers = () => {
 
 const removeLuckyWinners = () => {
   var nameEntryListTemp = JSON.parse(localStorage.getItem("name-entry-list"));
-  console.log("nameEntryList: ", nameEntryListTemp);
+  //   console.log("nameEntryList: ", nameEntryListTemp);
 
-  Object.keys(nameEntryListTemp).map((key, index) => {
-    console.log(key, index);
-  });
+  //   Object.keys(nameEntryListTemp).map((key, index) => {
+  //     console.log(nameEntryListTemp[key].name, index);
+  //   });
   // var updateNameEntryList = {}
   // nameEntryListTemp;
 
