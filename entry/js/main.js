@@ -304,6 +304,7 @@ $(function() {
       if (e.which !== 13) return;
       var inputValue = this.input.val().trim();
 
+      console.log("Added Employee ID: ", inputValue);
       if (!inputValue) return;
 
       Entries.create({ name: inputValue });
@@ -328,6 +329,7 @@ $(function() {
         nameListClass =
           Entries.length % 2 === 0 ? ".name-list.left" : ".name-list.left";
       }
+
       this.$(nameListClass).prepend(view.render().el);
     },
 
