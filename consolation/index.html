@@ -18,7 +18,19 @@
       integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
       crossorigin="anonymous"
     />
+    <link
+      href="https://fonts.googleapis.com/css?family=Lobster"
+      rel="stylesheet"
+      type="text/css"
+    />
     <link rel="stylesheet" href="css/conso.css" />
+    <style>
+      .sky {
+        height: 1100px;
+        color: #fff;
+        display: block;
+      }
+    </style>
   </head>
   <body>
     <!--[if lt IE 7]>
@@ -27,6 +39,7 @@
         <a href="#">upgrade your browser</a> to improve your experience.
       </p>
     <![endif]-->
+
     <header class="controls d-flex justify-content-center align-items-center">
       <div class="heading mr-sm-2">
         <h1 class="heading">Christmas Party Raffle</h1>
@@ -80,6 +93,7 @@
         </form>
       </div>
     </header>
+    
 
     <main class="container-fluid text-center">
       <section class="results p-2" id="resultsContainer"></section>
@@ -94,7 +108,10 @@
       </section>
     </main>
 
+    <div class="sky"></div>
+
     <script src="js/conso.js" async defer></script>
     <script src="../../js/lib/jquery-v1.8.2.js"></script>
+    <script src="../../js/lib/particles-v2.0.0.min.js"></script>
   </body>
 </html>
