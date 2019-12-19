@@ -176,8 +176,7 @@ function Sound(src, loop) {
     this.sound.volume = 0.4;
   };
 }
-
-(function() {
+console.log("running")(function() {
   backgroundSound = new Sound("../../assets/sounds/bg-sound-2.mp3", true);
   var isBgPlaying = false;
   $("body").click(function() {
