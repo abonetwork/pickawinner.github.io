@@ -1,5 +1,5 @@
 // Animation delay multiplier for the number balls display sequence:
-const animationDelayMultiplier = 1.0;
+const animationDelayMultiplier = 2.0;
 
 // build the numbers row:
 const _buildResultsHTML = numbers => {
