@@ -3,7 +3,7 @@ const animationDelayMultiplier = 2.0;
 
 // build the numbers row:
 const _buildResultsHTML = numbers => {
-  const delayTime = (numbers.length + 1 * animationDelayMultiplier) * 1000;
+  const delayTime = (numbers.length + 1 * animationDelayMultiplier) * 2000;
   setTimeout(function() {
     $("#removeBtn").show();
     $("button[id='pickAWinnerBtn']").attr("disabled", true);
