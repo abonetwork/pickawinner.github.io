@@ -26,9 +26,8 @@ header h1 {
   color: #999;
 }
 header h1:before {
-  /* content: ""; */
   content: "\f06b";
-  font-family: "FontAwesome";
+  font-family: "Font Awesome 5 Free";
   display: block;
   border-radius: 50%;
   background-color: #0d0d0d;
