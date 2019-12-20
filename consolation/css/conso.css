@@ -58,7 +58,7 @@ header h1 span {
 }
 .results .numbers > .number {
   display: inline-block;
-  font-size: 3em;
+  font-size: 3.5em;
   width: 2em;
   height: 2em;
   line-height: 200%;
